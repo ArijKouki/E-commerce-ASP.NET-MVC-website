@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Profile";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"] </span>
+    </div>
+}
+else{
+
+    User u = (User)ViewData["currentUser"];
+
+
+
+<div class="card text-center">
+   
+    <div class="card-body">
+        <div class="card-header">
+            <h1>@u.last_name @u.first_name</h1>
+        </div>
+        <h6 class="card-subtitle mb-2 text-muted"><b>Email:</b> @u.email</h6>
+        <h6 class="card-subtitle mb-2 text-muted"><b>Password:</b> @u.password</h6>
+        <h6 class="card-subtitle mb-2 text-muted"> <b>Birth date: </b>@u.birth_date</h6>
+        <h6 class="card-subtitle mb-2 text-muted"> <b>Adress: </b>@u.address</h6>
+    </div>
+   
+</div>
+}
