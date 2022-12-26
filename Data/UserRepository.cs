@@ -14,13 +14,14 @@ namespace project.Data
             return users.ToList();
         }
 
-        public User getUserByLogin(string email, string password) {
+        public User getUserByLogin(string email, string password)
+        {
             ProjectContext pc = ProjectContext.Instance;
             var users = pc.User.ToList();
-            User u=null;
-            foreach(var user in users)
+            User u = null;
+            foreach (var user in users)
             {
-                if(user.email == email && user.password == password) { u = user; }
+                if (user.email == email && user.password == password) { u = user; }
             }
             return u;
         }
@@ -34,5 +35,18 @@ namespace project.Data
             pc.User.Add(u);
             pc.SaveChanges();
         }
+
+         public void updateUser(string first_name, string last_name, string email, string password, string birth_date, string address)
+         {
+             ProjectContext pc = ProjectContext.Instance;
+             //User u = pc.User.Find(UserRepository.currentUser.Id);
+             currentUser.first_name = first_name;
+             currentUser.last_name = last_name;
+             currentUser.email = email;
+             currentUser.password = password;
+             currentUser.birth_date=birth_date;
+             currentUser.address = address;
+             pc.SaveChanges();
+         }
     }
 }

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Edit Profile";
+}
+
+@if (TempData["Error"] != null){
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"] </span>
+    </div>
+}
+else{
+
+    User u = (User)ViewData["currentUser"];
+
+
+
+    <div class="card text-center">
+
+        
+        <div>
+            <form asp-controller="Account" asp-action ="EditProfile" method="post">
+            
+                <table class="table table-borderless">
+                    <tr>
+                        <td>First name </td>
+                        <td><input name="first_name" asp-for="@u.first_name" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Last name </td>
+                        <td><input name="last_name" asp-for="@u.last_name" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email </td>
+                        <td><input name="email" asp-for="@u.email" type="email" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password </td>
+                        <td><input name="password" asp-for="@u.password" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Birth date </td>
+                        <td><input name="birth_date" asp-for="@u.birth_date" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Address </td>
+                        <td><input name="address" asp-for="@u.address" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Save changes" class="btn btn-outline-secondary" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+}

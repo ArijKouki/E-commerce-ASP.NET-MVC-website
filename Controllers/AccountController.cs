@@ -54,6 +54,38 @@ namespace project.Controllers
         }
 
         [HttpGet]
+        public IActionResult EditProfile()
+        {
+            if (UserRepository.currentUser != null)
+            {
+                ViewData["currentUser"] = UserRepository.currentUser;
+            }
+            else { TempData["Error"] = "You're not logged in!"; }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EditProfile(string first_name, string last_name, string email, string password, string birth_date, string address)
+        {
+            
+            Debug.WriteLine(first_name);
+            Debug.WriteLine(last_name);
+            Debug.WriteLine(email);
+            Debug.WriteLine(password);
+            Debug.WriteLine(birth_date);
+            Debug.WriteLine(address);
+
+            UserRepository ur = new UserRepository();
+            ur.updateUser(first_name, last_name, email, password, birth_date, address);
+
+            if (UserRepository.currentUser != null)
+            {
+                ViewData["currentUser"] = UserRepository.currentUser;
+            }
+            else { TempData["Error"] = "You're not logged in!"; }
+            return View("Profile");
+        }
+
+        [HttpGet]
         public IActionResult Register()
         {
             return View();

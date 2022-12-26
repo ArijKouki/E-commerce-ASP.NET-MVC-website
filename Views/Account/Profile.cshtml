@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Profile";
 }
 
@@ -21,10 +22,11 @@ else{
             <h1>@u.first_name @u.last_name</h1>
         </div>
         <h6 class="card-subtitle mb-2 text-muted"><b>Email:</b> @u.email</h6>
-        <h6 class="card-subtitle mb-2 text-muted"><b>Password:</b> @u.password</h6>
+            @*        <h6 class="card-subtitle mb-2 text-muted"><b>Password:</b> @u.password</h6> *@
         <h6 class="card-subtitle mb-2 text-muted"> <b>Birth date: </b>@u.birth_date</h6>
-        <h6 class="card-subtitle mb-2 text-muted"> <b>Adress: </b>@u.address</h6>
+        <h6 class="card-subtitle mb-2 text-muted"> <b>Address: </b>@u.address</h6>
     </div>
-   
+
+     <a href="/Account/EditProfile">Edit profile</a>
 </div>
 }
