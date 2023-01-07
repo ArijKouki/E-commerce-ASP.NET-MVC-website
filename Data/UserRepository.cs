@@ -1,23 +1,34 @@
 ﻿using project.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace project.Data
 {
     public class UserRepository
     {
-        public static User currentUser { get; set; }
-        public List<User> all()
+        private readonly ProjectContext context;
+
+        public UserRepository(ProjectContext context)
         {
-            ProjectContext pc = ProjectContext.Instance;
-            var users = pc.User;
-            if (users == null) { return new List<User>(); }
-            return users.ToList();
+            this.context = context;
+        }
+        public static User currentUser { get; set; }
+        public List<User> GetAllUsers()
+        {
+           if(context.User==null) { return new List<User>(); }
+            return context.User.ToList();
         }
 
-        public User getUserByLogin(string email, string password)
+        /*public User GetUserByID(int id)
         {
-            ProjectContext pc = ProjectContext.Instance;
-            var users = pc.User.ToList();
+            return context.User.Find(id);
+        }*/
+
+
+        public User GetUserByLogin(string email, string password)
+        {
+            
+            var users = context.User.ToList();
             User u = null;
             foreach (var user in users)
             {
@@ -26,27 +37,27 @@ namespace project.Data
             return u;
         }
 
-        public void addUser(string first_name, string last_name, string email, string password, string birth_date, string address)
+        public void AddUser(string first_name, string last_name, string email, string password, string birth_date, string address)
         {
-            ProjectContext pc = ProjectContext.Instance;
+            
             User.id_generator++;
             var id = User.id_generator;
             User u = new User(id, first_name, last_name, email, password, birth_date, address);
-            pc.User.Add(u);
-            pc.SaveChanges();
+            context.User.Add(u);
         }
 
-         public void updateUser(string first_name, string last_name, string email, string password, string birth_date, string address)
+         public void UpdateUser(string first_name, string last_name, string email, string password, string birth_date, string address)
          {
-             ProjectContext pc = ProjectContext.Instance;
-             //User u = pc.User.Find(UserRepository.currentUser.Id);
+             
+             //User u = context.User.Find(UserRepository.currentUser.Id);
              currentUser.first_name = first_name;
              currentUser.last_name = last_name;
              currentUser.email = email;
              currentUser.password = password;
              currentUser.birth_date=birth_date;
              currentUser.address = address;
-             pc.SaveChanges();
+             //context.SaveChanges();
          }
+        
     }
 }
