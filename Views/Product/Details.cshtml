@@ -1,4 +1,4 @@
-﻿
+﻿@using project.Data
 @{
     ViewData["Title"] = "Details";
     ViewData["Title"] = "Details";
@@ -26,7 +26,8 @@ else{
                 <h4 class="card-text">@s.description</h4>
                 <br>
                 <h3 class="card-title">@s.price $ </h3>
-                <a href="/Product/Buy" class="btn btn-outline-secondary"><h2>Buy now!</h2></a>
+            
+            <a href="@(UserRepository.currentUser!=null? "/Product/Buy" : "/Account/Login")" class="btn btn-outline-secondary"><h2>Buy now!</h2></a>
                 
                 
                 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using project.Data;
 using project.Models;
 using System.Diagnostics;
 
@@ -15,12 +16,17 @@ namespace project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            ProjectContext Context = ProjectContext.Instance;
+            IProductRepository ProductRep = new ProductRepository(Context);
+            return View(ProductRep.getAllProducts());
         }
 
         public IActionResult LoggedIn()
         {
-            return View();
+            ProjectContext Context = ProjectContext.Instance;
+            IProductRepository ProductRep = new ProductRepository(Context);
+            return View(ProductRep.getAllProducts());
         }
 
         public IActionResult Privacy()

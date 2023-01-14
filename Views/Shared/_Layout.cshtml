@@ -54,6 +54,7 @@
                 </a>
             </div>
             <ul class="nav">
+
                 <li class="nav-item menu-items">
                     <a class="nav-link" href=@(UserRepository.currentUser!=null? "/Home/LoggedIn" : "/Home/Index")>
                         <span class="menu-icon">
@@ -62,6 +63,7 @@
                         <span class="menu-title">Home</span>
                     </a>
                 </li>
+
                 <li class="nav-item menu-items">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <span class="menu-icon">
@@ -81,7 +83,7 @@
                 <li class="nav-item menu-items">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <span class="menu-icon">
-                            <i class='bx bxs-music'></i>
+                            <i class='bx bxs-playlist'></i>
                         </span>
                         <span class="menu-title">Genre</span>
                         <i class="menu-arrow"></i>
