@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details";
+    Product s = (Product)ViewData["Product"];
+
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"] </span>
+    </div>
+}
+else{
+   
+        <div class="card" style="width: 60rem;display:flex;flex-direction:row;align-items:center;">
+            
+            <img src="~/images/@s.img" class="card-img-top" alt="..." style="width:50%;height:50%">
+            
+            <div class="card-body">
+                <h1 class="card-title">@s.name</h1>
+                <h2 class="card-title">@s.singer</h2>
+                <h4 class="card-title">Release date: @s.release_date</h4>
+                <h4 class="card-title">Description:</h4>
+                <h4 class="card-text">@s.description</h4>
+                <br>
+                <h3 class="card-title">@s.price $ </h3>
+                <a href="/Product/Buy" class="btn btn-outline-secondary"><h2>Buy now!</h2></a>
+                
+                
+                
+            </div>
+
+        </div>
+
+}  
+

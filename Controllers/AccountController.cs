@@ -7,18 +7,21 @@ namespace project.Controllers
 {
     public class AccountController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(ProjectContext.Instance);
+        private IUnitOfWork unitOfWork;
         
+        public AccountController() {
+            this.unitOfWork = new UnitOfWork(ProjectContext.Instance);
+        }
         public IActionResult All()
         {
             //userRepository.AddUser("Arij", "Kouki", "arijkouki17@gmail.com", "cookieee", "28/06/2001", "Tunis");
-            List <User> l= unitOfWork.userRepository.GetAllUsers();
+            List<User> l = unitOfWork.Users.GetAllUsers();
             ViewData["usersList"] = l;
             return View();
         }
 
-        
-            [HttpGet]
+
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
@@ -27,7 +30,7 @@ namespace project.Controllers
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            User u= unitOfWork.userRepository.GetUserByLogin(email, password);
+            User u = unitOfWork.Users.GetUserByLogin(email, password);
             if (u != null)
             {
                 UserRepository.currentUser = u;
@@ -66,7 +69,7 @@ namespace project.Controllers
         [HttpPost]
         public IActionResult EditProfile(string first_name, string last_name, string email, string password, string birth_date, string address)
         {
-            unitOfWork.userRepository.UpdateUser(first_name, last_name, email, password, birth_date, address);
+            unitOfWork.Users.UpdateUser(first_name, last_name, email, password, birth_date, address);
             unitOfWork.Save();
 
             if (UserRepository.currentUser != null)
@@ -83,10 +86,10 @@ namespace project.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(string first_name, string last_name,string email,string password, string birth_date, string address)
+        public IActionResult Register(string first_name, string last_name, string email, string password, string birth_date, string address)
         {
 
-            unitOfWork.userRepository.AddUser(first_name, last_name, email, password, birth_date, address);
+            unitOfWork.Users.AddUser(first_name, last_name, email, password, birth_date, address);
             unitOfWork.Save();
             return View("RegisterCompleted");
         }

@@ -72,8 +72,67 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="#">Singles</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="#">Albums</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="/Product/Singles">Singles</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="/Product/Albums">Albums</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="menu-icon">
+                            <i class='bx bxs-music'></i>
+                        </span>
+                        <span class="menu-title">Genre</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> 
+                                @Html.ActionLink("Pop Rock", "ProductByGenre", "Product",
+                                new { genre = "Pop Rock"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Alternative Rock", "ProductByGenre", "Product",
+                                new { genre = "Alternative Rock"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Indie Rock", "ProductByGenre", "Product",
+                                new { genre = "Indie Rock"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Pop", "ProductByGenre", "Product",
+                                new { genre = "Pop"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("RnB", "ProductByGenre", "Product",
+                                new { genre = "RnB"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Rock", "ProductByGenre", "Product",
+                                new { genre = "Rock"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Country", "ProductByGenre", "Product",
+                                new { genre = "Country"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Latino", "ProductByGenre", "Product",
+                                new { genre = "Latino"},
+                                new { @class = "btn"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Arabica", "ProductByGenre", "Product",
+                                new { genre = "Arabica"},
+                                new { @class = "btn"})
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -137,6 +196,17 @@
                                         </div>
                                         <div class="preview-item-content">
                                             <p class="preview-subject mb-1">My Profile</p>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item preview-item" href="/Account/GetCommands">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class='bx bx-shopping-bag test-success'></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1">My Commands</p>
                                         </div>
                                     </a>
 

@@ -24,9 +24,11 @@ namespace project.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<ProjectContext>();
             var connection = optionsBuilder.UseSqlite("Data Source=C:\\Users\\MSI\\source\\repos\\project\\project.db");
+            //var connection = optionsBuilder.UseSqlite("Data Source=C:\\Users\\MSI\\source\\repos\\project\\project (1).db");
             return new ProjectContext(optionsBuilder.Options);
         }
 
         public DbSet<User>? User { get; set; }
+        public DbSet<Product>? Product { get; set; }
     }
 }

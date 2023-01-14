@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "All Albums";
+}
+
+<div class="row">
+    @foreach (Product s in Model)
+    {
+
+        <div class="card" style="width: 22rem;">
+            <img src="~/images/@s.img" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">@s.name</h4>
+                <h6 class="card-title">@s.singer</h6>
+                <h6 class="card-title">@s.price $ </h6>
+                 
+                @Html.ActionLink("View details", "Details", "Product",
+                  new { Product_Id = s.Product_Id},
+                  new { @class = "btn btn-outline-secondary"})
+
+            </div>
+
+        </div>
+
+    }
+</div>
