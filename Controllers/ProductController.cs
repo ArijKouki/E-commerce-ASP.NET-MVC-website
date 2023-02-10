@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using project.Data;
 using project.Models;
+using System.Diagnostics;
+
 
 
 namespace project.Controllers
 {
     public class ProductController : Controller
     {
+        private IUnitOfWork unitOfWork;
+        public ProductController()
+        {
+            this.unitOfWork = new UnitOfWork(ProjectContext.Instance);
+        }
         public IActionResult Index()
         {
             return View();
@@ -40,6 +47,19 @@ namespace project.Controllers
             ProjectContext Context = ProjectContext.Instance;
             IProductRepository ProductRep = new ProductRepository(Context);
             return View(ProductRep.GetProductByGenre(genre));
+        }
+        [HttpGet]
+        public IActionResult Search(string searchTerm)
+        {
+            Debug.WriteLine(searchTerm);
+            List<Product> Products = new List<Product>();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                Products =(List < Product >) unitOfWork.Products.SearchByNameSinger(searchTerm);
+                Debug.WriteLine(Products);
+            }
+            ViewData["products"]=Products;
+            return View();
         }
     }
 }

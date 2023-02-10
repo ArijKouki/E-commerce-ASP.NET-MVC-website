@@ -1,8 +1,9 @@
-﻿@using project.Data
+﻿@using project.Data;
 @{
     ViewData["Title"] = "Details";
     ViewData["Title"] = "Details";
     Product s = (Product)ViewData["Product"];
+    int Quantity = 1;
 
 }
 
@@ -18,7 +19,7 @@ else{
             
             <img src="~/images/@s.img" class="card-img-top" alt="..." style="width:50%;height:50%">
             
-            <div class="card-body">
+           <div class="card-body">
                 <h1 class="card-title">@s.name</h1>
                 <h2 class="card-title">@s.singer</h2>
                 <h4 class="card-title">Release date: @s.release_date</h4>
@@ -26,12 +27,42 @@ else{
                 <h4 class="card-text">@s.description</h4>
                 <br>
                 <h3 class="card-title">@s.price $ </h3>
-            
-            <a href="@(UserRepository.currentUser!=null? "/Product/Buy" : "/Account/Login")" class="btn btn-outline-secondary"><h2>Buy now!</h2></a>
+
+            @if (s.nb_exemplaires > 0)
+            {
+                <span class="badge badge-pill badge-success" style="margin:10px;font-size:medium">In stock</span>
+
+
+                <form asp-controller="Orders" asp-action ="Add" method="post">
+                <div class="form-outline" style="display:flex;gap:10px;align-items:stretch" >
+                    <h3 class="card-title">Quantity: </h3>
+                        <input name="Quantity" asp-for=@Quantity min="1" max="@s.nb_exemplaires" value=@Quantity type="number" id="typeNumber" class="form-control" style="width: 80px;margin-bottom:20px;color:white" />
+                </div>
                 
-                
-                
-            </div>
+
+                @if (UserRepository.currentUser == null)
+                {
+                    <a href="/Account/Login" class="btn btn-outline-secondary" >
+                        <h2>Buy now!</h2>
+                    </a>
+                }
+                else
+                {
+                        
+
+                        <input type="hidden" name="Product_Id" value="@s.Product_Id" />
+                        <input type="submit" value="Buy now!" class="btn btn-outline-secondary" style="font-size:30px;padding:10px" />
+
+                    
+                }
+                </form>
+            }
+            else
+            {
+                <span class="badge badge-pill  badge-danger" style="margin:10px;font-size:medium">Out of stock</span>
+            }
+
+        </div>
 
         </div>
 

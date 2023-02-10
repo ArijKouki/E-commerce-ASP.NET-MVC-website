@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace project.Models
 {
     public class User
     {
-        public User(int User_Id, string first_name, string last_name, string email, string password, string birth_date, string address)
+        public User(string first_name, string last_name, string email, string password, string birth_date, string address)
         {
-            this.User_Id = User_Id;
             this.first_name = first_name;
             this.last_name = last_name;
             this.email = email;
@@ -13,9 +14,10 @@ namespace project.Models
             this.birth_date = birth_date;
             this.address = address;
         }
-        public static int id_generator = 100;
 
-        [Key]  public int User_Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int User_Id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set;}
         public string email { get; set; }

@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Shopping cart";
+    List<CartItem> l = (List <CartItem>) ViewData["CartItems"];
+    float Total = 0;
+}
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"] </span>
+    </div>
+}
+else{
+<div style="display:flex;align-items:center;flex-direction:column;">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Product image</th>
+            <th scope="col">Product name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Sum</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(CartItem i in l)
+        {
+            <tr>
+                <td><img src="~/images/@i.Product_Img" style="height:80px;width:80px;border-radius:5px" alt="..."></td>
+                <td>@i.Product_Name</td>
+                <td>@i.Quantity</td>
+                 @{
+                     Total = Total + i.Sum;
+                   }
+                <td>@i.Sum $</td>
+                <td>
+                    <a class="rounded-circle " href="@Url.Action( "Remove", "Orders",new { Item_Id = i.Item_Id})">
+                      <div class="preview-icon  rounded-circle">
+                            <i class='bx bxs-trash text-secondary' style="font-size:20px;padding:8px;"></i>
+                      </div>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@if(l.Count()!=0){
+        <span class="badge badge-pill  badge-danger" style="width:20%;margin:1%">Total =  @Total</span>
+        <div style="display:flex;width:40%">
+            <a href="/Home/LoggedIn" class="btn btn-secondary" style="width:50%;margin:1%">  Continue shopping </a>
+            <a href="/Orders/Order"  class="btn btn-outline-secondary" style="width:50%;margin:1%">  Order </a>
+        </div>
+}
+</div>
+
+}

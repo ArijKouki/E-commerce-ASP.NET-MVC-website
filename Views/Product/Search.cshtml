@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Search";
+    List<Product> Products = (List<Product>)ViewData["products"];
+}
+
+@if (Products != null)
+{
+    <div class="row">
+        @foreach (Product s in Products)
+        {
+
+            <div class="card" style="width: 22rem;">
+                <img src="~/images/@s.img" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">@s.name</h4>
+                    <h6 class="card-title">@s.singer</h6>
+                    <h6 class="card-title">@s.price $ </h6>
+
+                    @Html.ActionLink("View details", "Details", "Product",
+            new { Product_Id = s.Product_Id},
+            new { @class = "btn btn-outline-secondary"})
+
+
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+}
+
+

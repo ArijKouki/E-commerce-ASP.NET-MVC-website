@@ -19,6 +19,10 @@ namespace project.Data
             return context.User.ToList();
         }
 
+        public Task<List<User>> GetAllUsersAsync()
+        {
+            return context.User.ToListAsync();
+        }
         /*public User GetUserByID(int id)
         {
             return context.User.Find(id);
@@ -40,9 +44,8 @@ namespace project.Data
         public void AddUser(string first_name, string last_name, string email, string password, string birth_date, string address)
         {
 
-            User.id_generator++;
-            var id = User.id_generator;
-            User u = new User(id, first_name, last_name, email, password, birth_date, address);
+            
+            User u = new User( first_name, last_name, email, password, birth_date, address);
             context.User.Add(u);
         }
 

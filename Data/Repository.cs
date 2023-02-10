@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Data.Entity;
+using System.Linq.Expressions;
 
 namespace project.Data
 {
@@ -45,10 +46,20 @@ namespace project.Data
             return context1.Set<TEntity>().ToList();
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            var result = await context1.Set<TEntity>().ToListAsync();
+            return result;
+        }
 
-#pragma warning disable CS8603 // Existence possible d'un retour de référence null.
+
         public TEntity GetEntity(int id) => context1.Set<TEntity>().Find(id);
-#pragma warning restore CS8603 // Existence possible d'un retour de référence null.
+
+        public async Task<TEntity> GetEntityAsync(int id)
+        {
+            var result= await context1.Set<TEntity>().FindAsync(id);
+            return result;
+        }
 
         public bool Remove(TEntity entity)
         {
@@ -62,6 +73,7 @@ namespace project.Data
                 throw ex;
             }
         }
+
 
         public bool RemoveRange(IEnumerable<TEntity> entities)
         {
